@@ -69,7 +69,7 @@ const tourSchema = new mongoose.Schema(
       type: String,
       required: [true, 'A Tour must have a cover image'],
     },
-    image: [String],
+    images: [String],
     createdAt: {
       type: Date,
       default: Date.now(),
@@ -172,16 +172,17 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 
+tourSchema.post(/^find/, function (docs, next) {
+  console.log(`Querry took ${Date.now() - this.start} milliseconds `);
+  next();
+});
+
 //AGGREGATION MIDDLEWARE
 // tourSchema.pre('aggregate', function (next) {
 //   this.pipeline().unshift({ $match: { secretTour: { $ne: true } } });
 //   next();
 // });
 
-tourSchema.post(/^find/, function (docs, next) {
-  console.log(`Querry took ${Date.now() - this.start} milliseconds `);
-  next();
-});
 const Tour = mongoose.model('Tour', tourSchema);
 
 module.exports = Tour;
