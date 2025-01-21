@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       // 1) Get the checkout session from the API
       const session = await axios.get(
-        `http://localhost:3000/api/v1/booking/checkout-session/${tourId}`,
+        `http://localhost:3000/api/v1/bookings/checkout-session/${tourId}`,
       );
 
       // 2) create checkout form + charge credit card
