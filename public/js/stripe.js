@@ -1,30 +1,6 @@
-// /* eslint-disable */
-// import axios from 'axios';
-// import { showAlert } from './alert';
-// const stripe = Stripe(
-//   'pk_test_51QjE1AG2pmnwx57qTmAIPY2yDAmlKx3CwBbmzowkWGfV11IC7Dq4UI0EdnHe3fJLbBy92tscrDjeqMkRyaM6tNnW00Cfe7P1qL',
-// );
-
-// export const bookTour = async (tourId) => {
-//   try {
-//     const session = await axios(
-//       `http://localhost:3000/api/v1/booking/checkout-session/${tourId}`,
-//     );
-
-//     console.log(session);
-
-//     //2) create checkout form + process or charge the credit card
-//   } catch (error) {
-//     showAlert('error', error);
-//   }
-//   //1)get the checkout session from Api server
-// };
-
 /* eslint-disable */
 import axios from 'axios';
 import { showAlert } from './alert';
-
-/* eslint-disable */
 
 document.addEventListener('DOMContentLoaded', () => {
   if (typeof Stripe === 'undefined') {
@@ -40,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       // 1) Get the checkout session from the API
       const session = await axios.get(
-        `http://localhost:3000/api/v1/bookings/checkout-session/${tourId}`,
+        `/api/v1/bookings/checkout-session/${tourId}`,
       );
 
       // 2) create checkout form + charge credit card

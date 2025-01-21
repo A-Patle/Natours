@@ -13,6 +13,8 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cookieParser = require('cookie-parser');
+// eslint-disable-next-line import/no-extraneous-dependencies
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -53,13 +55,8 @@ app.use(
         ], // Allow external styles
         connectSrc: [
           "'self'",
-          'http://localhost:3000',
           'https://api.mapbox.com',
           'https://js.stripe.com',
-          'ws://localhost:64320',
-          'ws://localhost:51319',
-          'ws://localhost:51937/',
-          'ws://localhost:53165/',
         ], // Allow API calls
         imgSrc: [
           "'self'",
@@ -124,6 +121,8 @@ app.use(
     ],
   }),
 );
+
+app.use(compression());
 
 //Test middlewares
 app.use((req, res, next) => {
