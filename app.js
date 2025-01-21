@@ -19,6 +19,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
@@ -42,22 +43,41 @@ app.use(
           "'self'",
           'https://cdn.jsdelivr.net',
           'https://api.mapbox.com',
-        ], // Allow external scripts from cdn.jsdelivr.net
+          'https://js.stripe.com',
+        ], // Allow external scripts
         styleSrc: [
           "'self'",
           'https://cdn.jsdelivr.net',
           'https://fonts.googleapis.com',
-          'https://api.mapbox.com', // Allow Mapbox styles
+          'https://api.mapbox.com',
         ], // Allow external styles
-        connectSrc: ["'self'", 'http://localhost:3000', 'ws://localhost:64320'], // Allow connections to the same domain (API calls)
+        connectSrc: [
+          "'self'",
+          'http://localhost:3000',
+          'https://api.mapbox.com',
+          'https://js.stripe.com',
+          'ws://localhost:64320',
+          'ws://localhost:51319',
+          'ws://localhost:51937/',
+          'ws://localhost:53165/',
+        ], // Allow API calls
         imgSrc: [
           "'self'",
           'data:',
           'https://cdn.jsdelivr.net',
           'https://api.mapbox.com',
-        ], // Allow images from the current domain or Mapbox
-        fontSrc: ["'self'", 'https://fonts.gstatic.com'], // Allow fonts from Google Fonts
-        workerSrc: ["'self'", 'https://api.mapbox.com', 'blob:'], // Allow Web Workers from Mapbox and blob URIs
+        ], // Allow images
+        fontSrc: ["'self'", 'https://fonts.gstatic.com'], // Allow Google Fonts
+        frameSrc: [
+          "'self'",
+          'https://js.stripe.com', // Explicitly allow Stripe for iframe embedding
+        ], // Allow iframes from Stripe
+        workerSrc: [
+          "'self'",
+          'https://api.mapbox.com',
+          'https://js.stripe.com',
+          'blob:',
+        ], // Allow Web Workers
       },
     },
   }),
@@ -118,6 +138,7 @@ app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/bookings', bookingRouter);
 
 app.get('*.map', (req, res) => {
   res.status(404).send('Source map not found');
