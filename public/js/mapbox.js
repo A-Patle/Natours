@@ -2,10 +2,10 @@
 export const displayMap = (locations) => {
   mapboxgl.accessToken =
     'sk.eyJ1IjoiYWtraTg4MjciLCJhIjoiY202ODBoZjAyMDh4aTJrcXVscmt1c2wzZiJ9.xPl_YgFAx88acdnAlT7UEg';
-  mapboxgl.style = 'mapbox://styles/akki8827/cm67zl91600hp01sfcn6ugr3l';
 
   var map = new mapboxgl.Map({
     container: 'map',
+    style: 'mapbox://styles/akki8827/cm67zl91600hp01sfcn6ugr3l',
     scrollZoom: false,
     // center: [-118.113491, 34.111745],
     // zoom: 10,
