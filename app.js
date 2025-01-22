@@ -31,7 +31,7 @@ const viewRouter = require('./routes/viewRoutes');
 
 const app = express();
 
-app.enable('trust proxy');
+// app.enable('trust proxy');
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
@@ -69,11 +69,15 @@ app.use(
           'https://cdn.jsdelivr.net',
           'https://fonts.googleapis.com',
           'https://api.mapbox.com',
+          "'unsafe-inline'", // Required for certain inline styles
         ], // Allow external styles
         connectSrc: [
           "'self'",
           'https://api.mapbox.com',
+          'https://events.mapbox.com',
           'https://js.stripe.com',
+          'ws:', // Allow WebSocket connections (testing locally)
+          'wss:', // Allow secure WebSocket connections
         ], // Allow API calls
         imgSrc: [
           "'self'",
@@ -84,14 +88,16 @@ app.use(
         fontSrc: ["'self'", 'https://fonts.gstatic.com'], // Allow Google Fonts
         frameSrc: [
           "'self'",
-          'https://js.stripe.com', // Explicitly allow Stripe for iframe embedding
+          'https://js.stripe.com', // Allow Stripe frames
         ], // Allow iframes from Stripe
         workerSrc: [
           "'self'",
           'https://api.mapbox.com',
           'https://js.stripe.com',
-          'blob:',
+          'blob:', // Allow Web Workers and Blob URLs
         ], // Allow Web Workers
+        objectSrc: ["'none'"], // Disallow object embeds
+        upgradeInsecureRequests: [], // Force HTTPS if necessary
       },
     },
   }),
