@@ -47,25 +47,18 @@ exports.getCheckoutSession = catchAsync(async (req, res, next) => {
 // exports.createBookingCheckout = catchAsync(async (req, res, next) => {
 //   //This is only Temporary, because it's unsecure: everyone can make booking without paying
 //   const { tour, user, price } = req.query;
-
 //   if (!tour && !user && !price) return next();
-
 //   await Booking.create({ tour, user, price });
-
 //   res.redirect(req.originalUrl.split('?')[0]);
 // });
 
 const createBookingCheckout = async (session) => {
-  console.log('Session object:', session);
   const lineItems = await stripe.checkout.sessions.listLineItems(session.id);
   const tour = session.client_reference_id;
   const user = (await User.findOne({ email: session.customer_email })).id;
   const price = lineItems.data[0].price.unit_amount / 100;
-
-  console.log(`Tour: ${tour}, User: ${user}, Price: ${price}`);
   try {
     await Booking.create({ tour, user, price });
-    console.log('Booking successfully created');
   } catch (err) {
     console.error('Booking creation failed:', err.message);
   }
@@ -81,16 +74,12 @@ exports.webhookCheckout = (req, res, next) => {
       process.env.STRIPE_WEBHOOK_SECRET,
     );
   } catch (error) {
-    console.error('Webhook signature verification failed:', error.message);
     return res.status(400).send(`Webhook error: ${error.message}`);
   }
 
-  console.log('Webhook triggered:', event.type);
   if (event.type === 'checkout.session.completed') {
-    console.log('Session completed event:', event.data.object);
     createBookingCheckout(event.data.object);
   }
-
   res.status(200).json({ received: true });
 };
 
