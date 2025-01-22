@@ -14,6 +14,8 @@ const hpp = require('hpp');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cookieParser = require('cookie-parser');
 // eslint-disable-next-line import/no-extraneous-dependencies
+const bodyParser = require('body-parser');
+// eslint-disable-next-line import/no-extraneous-dependencies
 const compression = require('compression');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const cors = require('cors');
@@ -110,7 +112,7 @@ app.use('/api', limiter);
 
 app.post(
   '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
+  bodyParser.raw({ type: 'application/json' }),
   bookingController.webhookCheckout,
 );
 
