@@ -6648,7 +6648,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.displayMap = void 0;
 /* eslint-disable */
 var displayMap = exports.displayMap = function displayMap(locations) {
-  mapboxgl.accessToken = 'sk.eyJ1IjoiYWtraTg4MjciLCJhIjoiY202ODBoZjAyMDh4aTJrcXVscmt1c2wzZiJ9.xPl_YgFAx88acdnAlT7UEg';
+  mapboxgl.accessToken = 'pk.eyJ1IjoiYWtraTg4MjciLCJhIjoiY202N3c2a3h2MDgxeDJqczhjdnNuZzd5eSJ9.RBm0Ota7Vt1nKBkjfeQqAw';
   var map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/akki8827/cm67zl91600hp01sfcn6ugr3l',
@@ -13393,7 +13393,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51721" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53275" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
