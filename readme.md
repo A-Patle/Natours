@@ -12,8 +12,8 @@ Express.js: A lightweight and flexible Node.js framework used to structure the b
 MongoDB & Mongoose: MongoDB serves as the NoSQL database to store data, and Mongoose is used to handle data modeling and interaction with the database.
 Parcel: A zero-config bundler used for compiling and bundling the frontend assets.
 Deployment
-The project is deployed on Railway (a cloud platform for hosting applications) url:-(https://railway.com/), ensuring scalability and reliability. You can access the live version of the website here:
-[Natours - Production](https://natours-production-2a0e.up.railway.app/)
+The project is deployed on Render (a cloud platform for hosting applications) url:-(https://render.com/), ensuring scalability and reliability. You can access the live version of the website here:
+[Natours - Production](https://natours-yzx0.onrender.com/)
 
 Signup & Email Validation
 Users can register using any email domain, but only email addresses with the domain @uf.edu.pl will receive a welcome or othere related emails. We can get temporary email with the required domain from 10MinuteMail (https://10minutesemail.net/).
